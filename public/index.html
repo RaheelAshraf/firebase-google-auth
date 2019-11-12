@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title> Google Sign In</title>
+</head>
+
+<body>
+    <h1> Please Sign In below </h1>
+    <button onclick=GoogleSignIn()> Google SignIn </button>
+    <script src="https://www.gstatic.com/firebasejs/4.8.1/firebase.js"></script>
+    <script>
+        // Initialize Firebase
+        var config = {
+            apiKey: "AIzaSyDIchYh_VuRBZL8Fw1Qc06KURMEerBu9zg",
+            authDomain: "authtesting-15c32.firebaseapp.com",
+            databaseURL: "https://authtesting-15c32.firebaseio.com",
+            projectId: "authtesting-15c32",
+            storageBucket: "authtesting-15c32.appspot.com",
+            messagingSenderId: "93963372346",
+            appId: "1:93963372346:web:85644b7a7b1ced4816b203",
+            measurementId: "G-8ETNLQ3C9R"
+        };
+        firebase.initializeApp(config);
+
+        function GoogleSignIn() {
+            const base_provider = new firebase.auth.GoogleAuthProvider();
+            firebase.auth().signInWithPopup(base_provider)
+                .then(function (result) {
+                    const user = result.user;
+                    const name = user.displayName;
+                    const email = user.email;
+                    const phone = user.phoneNumber;
+                    console.log(`User Name is: ${name}
+User Email is ${email}
+User Phone Number is: ${phone}`);
+                    console.log(`Successfully logged in with google account`)
+
+                }).catch(function (e) {
+                    console.log(`error occurred: ${e}`);
+                    console.log(`failed to log in`)
+                })
+        }
+    </script>
+</body>
+
+</html>
